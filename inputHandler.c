@@ -69,8 +69,9 @@ int getInput(FILE *logs, const char *tOut) {
 		fprintf(logs, "%s: opened Pdata.csv\n", tOut);
 		p = getInputFromUser();
 		writeToFile(pFile, p);
+		fprintf(logs, "%s: writed data to Pdata.csv file\n", tOut);
 		fclose(pFile);	
-			
+		fprintf(logs, "%s: closed Pdata.csv\n", tOut);
 	} else if (strcmp("Ndata\n", s) == 0) {
 		// Open Ndata.csv file and check error	
 		FILE *nFile = fopen("Ndata.csv", "a+");		
@@ -79,9 +80,11 @@ int getInput(FILE *logs, const char *tOut) {
 			return (1);	
 		}
 		fprintf(logs, "%s: opened Ndata.csv\n", tOut);
-		p = getInputFromUser();			
+		p = getInputFromUser();
 		writeToFile(nFile, p);
+		fprintf(logs, "%s: writed data to Ndata.csv file\n", tOut);
 		fclose(nFile);
+		fprintf(logs, "%s: closed Pdata.csv\n", tOut);
 	} else {
 		fprintf(logs, "%s: wrong command \n", tOut);
 		fprintf(stderr, "wrong command\n");

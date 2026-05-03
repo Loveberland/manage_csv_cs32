@@ -23,8 +23,10 @@ int main(void) {
 	}
 	fprintf(logs, "%s: opend logs.txt\n", tOut);
 
-	int tmp = getInput(logs, tOut);
+	fprintf(logs, "%s: call getInput\n", tOut);
+	int status = getInput(logs, tOut);
+	fprintf(logs, "%s: ended getInput\n", tOut);
 
-	return (0);
+	return status;
 }
 
