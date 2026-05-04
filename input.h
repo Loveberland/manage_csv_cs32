@@ -3,7 +3,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-int input(FILE *logs, const char *t_out);
+int input(FILE *logs);
 
 #endif
 

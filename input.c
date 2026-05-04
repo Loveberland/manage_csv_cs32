@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <string.h>
-
 #include "input.h"
 #include "choice.h"
+#include "time_manager.h"
 
-int input_p(FILE *logs, const char *t_out) {
-	fprintf(logs, "%s: call input_p\n", t_out);
-
+int input_p(FILE *logs) {
 	char id[16], first_name[256], last_name[256], role[256], disease[512], durk_allergy[512], food[512], other[1024];
+	char t_out[TIMESIZE];
 
 	FILE *p_file = fopen("p_data.csv", "a+");
 	if (p_file == NULL) {
+		get_current_time(t_out, sizeof(t_out));	
 		fprintf(logs, "%s: can't open p_data.csv\n", t_out);
 		return (1);
 	}
@@ -55,20 +55,21 @@ int input_p(FILE *logs, const char *t_out) {
 	fprintf(p_file, "%s, ", durk_allergy);
 	fprintf(p_file, "%s, ", food);
 	fprintf(p_file, "%s\n", other);
+	get_current_time(t_out, sizeof(t_out));	
 	fprintf(logs, "%s: put %s, %s, %s, %s, %s, %s, %s, %s to p_data.csv\n", t_out, id, first_name, last_name, role, disease, durk_allergy, food, other);
 
-	fprintf(logs, "%s: input_p function finished executing\n", t_out);
+	fclose(p_file);
 
 	return (0);
 }
 
-int input_n(FILE *logs, const char *t_out) {
-	fprintf(logs, "%s: call input_n\n", t_out);
-
+int input_n(FILE *logs) {
 	char id[16], first_name[256], last_name[256], disease[512], durk_allergy[512], food[512], other[1024], linked_id[16];
+	char t_out[TIMESIZE];
 
 	FILE *n_file = fopen("n_data.csv", "a+");
 	if (n_file == NULL) {
+		get_current_time(t_out, sizeof(t_out));	
 		fprintf(logs, "%s: can't open n_data.csv\n", t_out);
 		return (1);
 	}
@@ -113,34 +114,27 @@ int input_n(FILE *logs, const char *t_out) {
 	fprintf(n_file, "%s, ", food);
 	fprintf(n_file, "%s, ", other);
 	fprintf(n_file, "%s\n", linked_id);
+	get_current_time(t_out, sizeof(t_out));	
 	fprintf(logs, "%s: put %s, %s, %s, %s, %s, %s, %s, %s to p_data.csv\n", t_out, id, first_name, last_name, disease, durk_allergy, food, other, linked_id);
 
-	fprintf(logs, "%s: input_n function finished executing\n", t_out);
+	fclose(n_file);
 
 	return (0);
 }
 
-int input(FILE *logs, const char *t_out) {
-	fprintf(logs, "%s: call input\n", t_out);
-
+int input(FILE *logs) {
 	while (1) {
 		int status = 0;
-		fprintf(logs, "%s: call input_choice_csv_handler\n", t_out);
 		int choice = input_choice_csv_handler();
 		if (choice == 0) {			
-			status = input_p(logs, &t_out[0]);	
+			status = input_p(logs);	
 		} else if (choice == 1) {
-			fprintf(logs, "%s: call input_n\n", t_out);
-			status = input_n(logs, &t_out[0]);	
-			fprintf(logs, "%s: input_n function finished executing\n", t_out);
+			status = input_n(logs);	
 		} else if (choice == 2) {
-			fprintf(logs, "%s: call back\n", t_out);
 			break;
 		}
 		if (status) return (1);
 	}
-
-	fprintf(logs, "%s: input function finished executing\n", t_out);
 
 	return 0;
 }
