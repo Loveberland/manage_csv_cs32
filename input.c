@@ -5,7 +5,7 @@
 #include "time_manager.h"
 
 int input_p(FILE *logs) {
-	char id[16], first_name[256], last_name[256], role[256], disease[512], durk_allergy[512], food[512], other[1024];
+	char id[16], first_name[256], last_name[256], nick_name[256], role[256], disease[512], durk_allergy[512], food[512], other[1024];
 	char t_out[TIMESIZE];
 
 	FILE *p_file = fopen("p_data.csv", "a+");
@@ -25,6 +25,10 @@ fprintf(stdout, "ID: ");
 	fprintf(stdout, "Last name: ");
 	fgets(last_name, sizeof(last_name), stdin);
 	last_name[strcspn(last_name, "\n")] = '\0';
+
+	fprintf(stdout, "Nick name: ");
+	fgets(nick_name, sizeof(nick_name), stdin);
+	nick_name[strcspn(nick_name, "\n")] = '\0';
 
 	fprintf(stdout, "Role: ");
 	fgets(role, sizeof(role), stdin);
@@ -49,13 +53,14 @@ fprintf(stdout, "ID: ");
 	fprintf(p_file, "%s, ", id);
 	fprintf(p_file, "%s, ", first_name);
 	fprintf(p_file, "%s, ", last_name);
+	fprintf(p_file, "%s, ", nick_name);
 	fprintf(p_file, "%s, ", role);
 	fprintf(p_file, "%s, ", disease);
 	fprintf(p_file, "%s, ", durk_allergy);
 	fprintf(p_file, "%s, ", food);
 	fprintf(p_file, "%s\n", other);
 	get_current_time(t_out, sizeof(t_out));	
-	fprintf(logs, "%s: put %s, %s, %s, %s, %s, %s, %s, %s to p_data.csv\n", t_out, id, first_name, last_name, role, disease, durk_allergy, food, other);
+	fprintf(logs, "%s: put %s, %s, %s, %s, %s, %s, %s, %s, %s to p_data.csv\n", t_out, id, first_name, last_name, nick_name, role, disease, durk_allergy, food, other);
 
 	fclose(p_file);
 
@@ -63,7 +68,7 @@ fprintf(stdout, "ID: ");
 }
 
 int input_n(FILE *logs) {
-	char id[16], first_name[256], last_name[256], disease[512], durk_allergy[512], food[512], other[1024], linked_id[16];
+	char id[16], first_name[256], last_name[256], nick_name[256], disease[512], durk_allergy[512], food[512], other[1024], linked_id[16];
 	char t_out[TIMESIZE];
 
 	FILE *n_file = fopen("n_data.csv", "a+");
@@ -84,6 +89,10 @@ int input_n(FILE *logs) {
 	fprintf(stdout, "Last name: ");
 	fgets(last_name, sizeof(last_name), stdin);
 	last_name[strcspn(last_name, "\n")] = '\0';
+
+	fprintf(stdout, "Nick name: ");
+	fgets(nick_name, sizeof(nick_name), stdin);
+	nick_name[strcspn(nick_name, "\n")] = '\0';
 
 	fprintf(stdout, "Disease: ");
 	fgets(disease, sizeof(disease), stdin);
@@ -108,13 +117,14 @@ int input_n(FILE *logs) {
 	fprintf(n_file, "%s, ", id);
 	fprintf(n_file, "%s, ", first_name);
 	fprintf(n_file, "%s, ", last_name);
+	fprintf(n_file, "%s, ", nick_name);
 	fprintf(n_file, "%s, ", disease);
 	fprintf(n_file, "%s, ", durk_allergy);
 	fprintf(n_file, "%s, ", food);
 	fprintf(n_file, "%s, ", other);
 	fprintf(n_file, "%s\n", linked_id);
 	get_current_time(t_out, sizeof(t_out));	
-	fprintf(logs, "%s: put %s, %s, %s, %s, %s, %s, %s, %s to p_data.csv\n", t_out, id, first_name, last_name, disease, durk_allergy, food, other, linked_id);
+	fprintf(logs, "%s: put %s, %s, %s, %s, %s, %s, %s, %s, %s to p_data.csv\n", t_out, id, first_name, last_name, nick_name, disease, durk_allergy, food, other, linked_id);
 
 	fclose(n_file);
 
