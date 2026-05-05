@@ -4,11 +4,11 @@
 #include "choice.h"
 #include "time_manager.h"
 
-int display_all(FILE *logs) {
+int display_all() {
 	return (0);
 }
 
-int display_one(FILE *logs) {
+int display_one() {
 	char *id = input_id_handler();
 	if (id[1] == '8') {
 		char line[4096], n_line[4096], p_title[4096], n_title[4096];
@@ -97,6 +97,31 @@ int display_one(FILE *logs) {
 			fprintf(stderr, "n_data.csv");
 			return (1);
 		}
+
+		char line[4096], title[4096], title_copy[4096];
+		char *saveptr1, *saveptr2;
+
+		fgets(title, sizeof(title), n_file);
+		title[strcspn(title, "\n")] = '\0';
+
+		while (fgets(line, sizeof(line), n_file)) {
+			line[strcspn(line, "\n")] = '\0';
+			char *token = strtok_r(line, ",", &saveptr1);
+			if (token == NULL || strcmp(token, id) != 0) continue;
+			strcpy(title_copy, title);
+			char *tmp = strtok_r(title, ",", &saveptr2);
+			while (tmp != NULL) {
+				fprintf(stdout, "%-15s", tmp);
+				tmp = strtok_r(NULL, ",", &saveptr2);
+			}
+			putchar('\n');
+			while (token != NULL) {
+				fprintf(stdout, "%-15s", token);
+				token = strtok_r(NULL, ",", &saveptr1);
+			}
+			putchar('\n');
+		}
+			
 	} else {
 		fprintf(stderr, "ID not found\n");
 		return (1);
@@ -104,13 +129,13 @@ int display_one(FILE *logs) {
 	return (0);	
 }
 
-int init_display(FILE *logs) {
+int init_display() {
 	int status = 0;
 	int c = input_mode_display_handler();
 	if (c == 0) {
-		status = display_all(logs);	
+		status = display_all();	
 	} else if (c == 1) {
-		status = display_one(logs);
+		status = display_one();
 	} else return (1);
 	return status;
 }
