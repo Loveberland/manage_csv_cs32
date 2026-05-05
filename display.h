@@ -3,8 +3,7 @@
 
 #include <stdio.h>
 
-int display_all(FILE *logs);
-int display_one(FILE *logs);
+int init_display(FILE *logs);
 
 #endif
 

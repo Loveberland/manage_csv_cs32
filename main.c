@@ -28,7 +28,8 @@ int main(void) {
 			status = 0;	
 		}
 		else if (choice == 3) {
-			status = display();	
+			status = init_display(logs);	
+			break;
 		}
 		else if (choice == 4) {
 			break;	
