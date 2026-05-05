@@ -3,6 +3,7 @@
 #include "choice.h"
 #include "input.h"
 #include "time_manager.h"
+#include "display.h"
 
 int main(void) {
 	char t_out[TIMESIZE];
@@ -27,7 +28,7 @@ int main(void) {
 			status = 0;	
 		}
 		else if (choice == 3) {
-			status = 0;	
+			status = display();	
 		}
 		else if (choice == 4) {
 			break;	
