@@ -23,14 +23,14 @@ int input_mode_handler() {
 	enable_raw_mode();
 
 	int choice = 0;
-	const char *options_mode[] = {"input", "edit", "delete", "display", "exit"};
+	const char *options_mode[] = {"input", "delete", "display", "exit"};
 	char c;
 
 	// Show option and get input
 	while (1) {
 		fprintf(stdout, "\033[H\033[J");	// ANSI escape code to clear terminal and move cursor to top
 		// Show all options and highlight selected option
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 4; i++) {
 			if (i == choice) fprintf(stdout, " -> \033[1;32m%s\033[0m \n", options_mode[i]);	// Highlight selected option
 			else fprintf(stdout, "    %s \n", options_mode[i]);
 		}
@@ -48,7 +48,7 @@ int input_mode_handler() {
 				if (seq[1] == 'A') {	// Up arrow
 					if (choice > 0) choice--;
 				} else if (seq[1] == 'B') {	// Down arrow
-					if (choice < 4) choice++;
+					if (choice < 3) choice++;
 				}
 			}
 		} else if (c == '\n') break;	// If enter key is pressed

@@ -20,12 +20,9 @@ int main(void) {
 		int status = 0;
 		int choice = input_mode_handler();	
 		if (choice == 0) status = input(logs);	
-		else if (choice == 1) status = 0;
-		else if (choice == 2) status = init_delete(logs);	
-		else if (choice == 3) {
-			return init_display();
-		}	
-		else if (choice == 4) break;	
+		else if (choice == 1) status = init_delete(logs);	
+		else if (choice == 2) return init_display();
+		else if (choice == 3) break;
 		if (status) return (1);
 	}
 

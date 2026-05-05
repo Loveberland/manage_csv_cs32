@@ -5,8 +5,8 @@
 #include "choice.h"
 
 int main() {
-	const char *modes[] = {"input", "edit", "delete", "display", "exit"};
-	for (int i = 0; i < 5; i++) {
+	const char *modes[] = {"input", "delete", "display", "exit"};
+	for (int i = 0; i < 4; i++) {
 		assert(i == input_mode_handler());
 		fprintf(stdout, "input_mode_handler return: %s\n", modes[i]);
 	}
