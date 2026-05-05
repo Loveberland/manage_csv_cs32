@@ -1,57 +1,58 @@
-# เขียนด้วย Gemini เพราะกูเขียน makefile ไม่เป็น
+# เขียนด้วย gemini เพราะกูเขียน makefile ไม่เป็น
 
-# --- Compiler and Flags ---
+# Set the C compiler
 CC = gcc
+# Set compiler flags and auto-dependencies
 CFLAGS = -Wall -Wextra -O2 -MMD -MP
 
-# --- Target Names & Directories ---
+# Set the main executable name
 TARGET = manage_csv_cs32
-TEST_TARGET = run_test
+# Set the output directory for object files
 OUT_DIR = out
 
-# --- Source and Object Files ---
-SRCS = $(wildcard *.c)
-MAIN_SRCS = $(filter-out tchoice.c, $(SRCS))
-
-# Use patsubst to change .c to .o AND prepend the OUT_DIR/ path
-OBJS = $(patsubst %.c, $(OUT_DIR)/%.o, $(MAIN_SRCS))
-
-# Dependency files will also go into the out/ directory
+# Get all .c files except tests
+SRCS = $(filter-out t_choice.c t_time_manager.c, $(wildcard *.c))
+# Define object file paths
+OBJS = $(patsubst %.c, $(OUT_DIR)/%.o, $(SRCS))
+# Define dependency file paths
 DEPS = $(OBJS:.o=.d)
 
-# --- Phony Targets ---
-.PHONY: all clean run test
+# Declare non-file targets
+.PHONY: all run test_choice test_time clean
 
+# Default target builds the main executable
 all: $(TARGET)
 
-# --- Build Rules ---
-
-# Rule to create the output directory
+# Target to create output directory
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
 
-# Link object files to create the final executable
+# Target to link objects into the executable
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
-# Compile each .c file into the out/ directory
-# The '| $(OUT_DIR)' is an order-only dependency ensuring the folder exists first
+# Target to compile .c files into .o files
 $(OUT_DIR)/%.o: %.c | $(OUT_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Include the generated dependency files
 -include $(DEPS)
 
-# --- Utility Rules ---
-
+# Target to build and run the main program
 run: $(TARGET)
 	./$(TARGET)
 
-test: tchoice.c choice.c
-	$(CC) -Wall -Wextra tchoice.c choice.c -o $(TEST_TARGET)
-	./$(TEST_TARGET)
+# Target for the choice module test
+test_choice: t_choice.c choice.c
+	$(CC) $(CFLAGS) $^ -o $@
+	./$@
 
-# Clean up the output directory and executables
+# Target for the time_manager module test
+test_time: t_time_manager.c time_manager.c
+	$(CC) $(CFLAGS) $^ -o $@
+	./$@
+
+# Target to clean up the workspace
 clean:
-	rm -rf $(OUT_DIR) $(TARGET) $(TEST_TARGET) *.out
+	rm -rf $(OUT_DIR) $(TARGET) test_choice test_time *.out
 

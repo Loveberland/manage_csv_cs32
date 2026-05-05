@@ -14,8 +14,7 @@ int input_p(FILE *logs) {
 		fprintf(logs, "%s: can't open p_data.csv\n", t_out);
 		return (1);
 	}
-
-	fprintf(stdout, "ID: ");
+fprintf(stdout, "ID: ");
 	fgets(id, sizeof(id), stdin);
 	id[strcspn(id, "\n")] = '\0';
 

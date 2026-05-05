@@ -64,13 +64,12 @@ int init_delete(FILE *logs) {
 	} else if (choice == 1) {
 		status = delete(logs, "n_data.csv");
 	} else if (choice == 2) {
-		status = 0;
 		fclose(tmp);
 		remove("tmp.csv");
 	} else {
 		fclose(tmp);
 		remove("tmp.csv");
-		return (1);
+		status = 1;
 	}
 
 	return status;

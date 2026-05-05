@@ -37,8 +37,11 @@ int display_all() {
 		strcpy(p_title_copy, p_title);
 		char *p_token = strtok_r(p_title_copy, ",", &saveptr2);
 		if (!is_p_print) {
+			int tmp = 0;
 			while (p_token != NULL) {
-				fprintf(stdout, "%s, ", p_token);
+				if (tmp) fprintf(stdout, ", ");
+				fprintf(stdout, "%s", p_token);
+				tmp = 1;
 				p_token = strtok_r(NULL, ",", &saveptr2);
 			}
 			is_p_print = 1;
@@ -46,8 +49,11 @@ int display_all() {
 		putchar('\n');
 
 		strcpy(p_id_copy, token);
+		int tmp = 0;
 		while (token != NULL) {
-			fprintf(stdout, "%s, ", token);
+			if (tmp) fprintf(stdout, ", ");
+			fprintf(stdout, "%s", token);
+			tmp = 1;
 			token = strtok_r(NULL, ",", &saveptr1);
 		}
 		putchar('\t');	
@@ -68,8 +74,11 @@ int display_all() {
 				strcpy(n_title_copy, n_title);
 				char *n_token = strtok_r(n_title_copy, ",", &saveptr2);
 				fprintf(stdout, "\n\t");
+				int tmp0 = 0;
 				while (n_token != NULL) {
-					fprintf(stdout, "%s, ", n_token);
+					if (tmp0) fprintf(stdout, ", ");
+					fprintf(stdout, "%s", n_token);
+					tmp0 = 1;
 					n_token = strtok_r(NULL, ",", &saveptr2);
 				}
 				is_n_print = 1;
@@ -77,8 +86,11 @@ int display_all() {
 			}
 			putchar('\t');
 			char *n = strtok_r(n_line, ",", &saveptr2);
+			int tmp0 = 0;
 			while (n != NULL) {
-				fprintf(stdout, "%s, ", n);
+				if (tmp0) fprintf(stdout, ", ");
+				fprintf(stdout, "%s", n);
+				tmp0 = 1;
 				n = strtok_r(NULL, ",", &saveptr2);
 			}
 			putchar('\n');
@@ -126,8 +138,11 @@ int display_one() {
 
 			strcpy(p_title_copy, p_title);
 			char *p_token = strtok_r(p_title_copy, ",", &saveptr2);
+			int tmp = 0;
 			while (p_token != NULL) {
-				fprintf(stdout, "%s, ", p_token);
+				if (tmp) fprintf(stdout, ", ");
+				fprintf(stdout, "%s", p_token);
+				tmp = 1;
 				p_token = strtok_r(NULL, ",", &saveptr2);
 			}
 			putchar('\n');
@@ -136,8 +151,11 @@ int display_one() {
 
 			// print p_data that match id
 			token = strtok_r(NULL, ",", &saveptr1);
+			int tmp0 = 0;
 			while (token != NULL) {
-				fprintf(stdout, "%s, ", token);
+				if (tmp0) fprintf(stdout, ", ");
+				fprintf(stdout, "%s", token);
+				tmp0 = 1;
 				token = strtok_r(NULL, ",", &saveptr1);
 			}
 
@@ -156,8 +174,10 @@ int display_one() {
 					strcpy(n_title_copy, n_title);
 					char *n_token = strtok_r(n_title_copy, ",", &saveptr2);
 					fprintf(stdout, "\n\t");
+					int tmp1 = 0;
 					while (n_token != NULL) {
-						fprintf(stdout, "%s, ", n_token);
+						if (tmp1) fprintf(stdout, ", ");
+						fprintf(stdout, "%s", n_token);
 						n_token = strtok_r(NULL, ",", &saveptr2);		
 					}
 					is_print = 1;
@@ -165,8 +185,11 @@ int display_one() {
 				}
 				fprintf(stdout, "\t");
 				char *n = strtok_r(n_line, ",", &saveptr2);
+				int tmp1 = 0;
 				while (n != NULL) {	// print
-					fprintf(stdout, "%s, ", n);
+					if (tmp1) fprintf(stdout, ", ");
+					fprintf(stdout, "%s", n);
+					tmp1 = 1;
 					n = strtok_r(NULL, ",", &saveptr2);
 				}
 				putchar('\n');
@@ -194,13 +217,19 @@ int display_one() {
 			if (token == NULL || strcmp(token, id) != 0) continue;
 			strcpy(title_copy, title);
 			char *tmp = strtok_r(title, ",", &saveptr2);
+			int tmp0 = 0;
 			while (tmp != NULL) {
-				fprintf(stdout, "%s, ", tmp);
+				if (tmp0) fprintf(stdout, ", ");
+				fprintf(stdout, "%s", tmp);
+				tmp0 = 1;
 				tmp = strtok_r(NULL, ",", &saveptr2);
 			}
 			putchar('\n');
+			int tmp1 = 0;
 			while (token != NULL) {
-				fprintf(stdout, "%s, ", token);
+				if (tmp1) fprintf(stdout, ", ");
+				fprintf(stdout, "%s", token);
+				tmp1 = 1;
 				token = strtok_r(NULL, ",", &saveptr1);
 			}
 			putchar('\n');
