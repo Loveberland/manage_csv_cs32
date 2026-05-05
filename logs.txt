@@ -1,5 +1,0 @@
-Wed 06 May 2026 02:57:50 AM +07: put 68050032, Kittipong, Sripolkrang, Register, G6PD, -, Board beans, - to p_data.csv
-Wed 06 May 2026 02:58:08 AM +07: put 68050031, Kittipong, Meeanan, Spy, -, -, -, - to p_data.csv
-Wed 06 May 2026 02:58:30 AM +07: put 69050195, Tantai, Sanpanya, Biaw, -, -, -, 68050032 to p_data.csv
-Wed 06 May 2026 02:58:53 AM +07: put 69050014, Kavin, Titarakkana, -, -, Halal, -, 68050032 to p_data.csv
-Wed 06 May 2026 02:59:19 AM +07: put 69050000, Assume, Assume, -, -, -, -, 68050031 to p_data.csv
