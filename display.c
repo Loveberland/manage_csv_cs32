@@ -2,7 +2,6 @@
 #include <string.h>
 
 #include "choice.h"
-#include "time_manager.h"
 
 int display_all() {
 	char line[4096], n_line[4096], p_title[4096], n_title[4096];
@@ -221,6 +220,8 @@ int init_display() {
 		status = display_all();	
 	} else if (c == 1) {
 		status = display_one();
+	} else if (c == 2) {
+		return (0);
 	} else return (1);
 	return status;
 }

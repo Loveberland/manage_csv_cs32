@@ -4,6 +4,7 @@
 #include "input.h"
 #include "time_manager.h"
 #include "display.h"
+#include "delete.h"
 
 int main(void) {
 	char t_out[TIMESIZE];
@@ -18,22 +19,13 @@ int main(void) {
 	while (1) {
 		int status = 0;
 		int choice = input_mode_handler();	
-		if (choice == 0) {
-			status = input(logs);	
-		}
-		else if (choice == 1) {
-			status = 0;
-		}
-		else if (choice == 2) {
-			status = 0;	
-		}
+		if (choice == 0) status = input(logs);	
+		else if (choice == 1) status = 0;
+		else if (choice == 2) status = init_delete(logs);	
 		else if (choice == 3) {
-			status = init_display();	
-			break;
-		}
-		else if (choice == 4) {
-			break;	
-		}
+			return init_display();
+		}	
+		else if (choice == 4) break;	
 		if (status) return (1);
 	}
 
