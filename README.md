@@ -40,7 +40,6 @@ All menus use the **arrow keys** to move the highlight and **Enter** to confirm.
 
 ```
  -> input        ← currently selected (green highlight)
-    edit
     delete
     display
     exit
